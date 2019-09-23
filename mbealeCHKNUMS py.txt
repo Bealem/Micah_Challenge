@@ -1,0 +1,19 @@
+import re 
+#imports python's regex module
+CHECK = re.compile( 
+    #creates a regex expression called CHECK that compiles the given input into a valid string
+    r"^" 
+    #Start of the input, verifyies that there is a number at the start of the data stream
+    r"(?!.*(\d)(-?\1){3})"
+   #This makes sure that there are no 4 of the same number in a row 
+    r"[456]" 
+    #starts with 4, 5, or 6
+    r"\d{3}" 
+    #has 3 repeating numbers
+    r"(?:-?\d{4}){3}" 
+    #checks to see if the number repeats 4 times while including any hyphens, it does this check 3 times as there are three hyphens in the credit card number
+    r"$") #end of the input checks that there isn't another number
+for i in range(int(input().strip())): 
+    #runs a for loop that casts the input as an int and also strips it of any spaces
+    print("Valid" if CHECK.search(input().strip()) else "Invalid") 
+    #prints out valid if the regex expression can compile the input, otherwise it returns invalid 
